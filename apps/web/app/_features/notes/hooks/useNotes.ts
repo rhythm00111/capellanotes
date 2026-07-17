@@ -1,5 +1,6 @@
-import { useFilteredNotes } from '@features/notes/state/notes.selectors';
-import { useNotesStore } from '@features/notes/state/notes.store';
+// Shared notes-domain hook surface.
+import { useFilteredNotes } from '../store';
+import { useNotesStore } from '../store';
 
 export const useNotes = () => useNotesStore((s) => s.notes);
 export const useFolders = () => useNotesStore((s) => s.folders);

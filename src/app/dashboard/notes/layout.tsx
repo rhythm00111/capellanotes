@@ -2,10 +2,7 @@
 
 import { Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { NotesErrorBoundary } from '@features/notes/components/shared';
-import { useNotesStore } from '@features/notes/state/notes.store';
-import { useNoteNavigation, openCommandPalette } from '@features/notes/hooks';
-import { CommandPalette } from '@features/notes/components/editor';
+import { NotesErrorBoundary, CommandPalette, useNotesStore, useNoteNavigation, openCommandPalette } from '@features/notes';
 
 function NotesLayoutContent({ children }: { children: React.ReactNode }) {
   const loadAll = useNotesStore((s) => s.loadAll);

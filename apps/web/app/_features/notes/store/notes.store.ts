@@ -1,12 +1,11 @@
 import { create } from 'zustand';
 import { Note, Folder, UpdateNoteInput, ALL_NOTES_FOLDER_ID, DEFAULT_FOLDER_COLOR } from '../types/notes.types';
-import { getNotesAction, getFoldersAction } from '../actions/get-notes.action';
-import { createNoteAction, createFolderAction } from '../actions/create-note.action';
-
-import { deleteNoteAction, restoreNoteAction, permanentDeleteNoteAction, emptyTrashAction, deleteFolderAction } from '../actions/delete-note.action';
-import { updateNoteAction, renameFolderAction } from '../actions/update-note.action';
+import { getNotesAction, getFoldersAction } from '../services/actions/get-notes.action';
+import { createNoteAction, createFolderAction } from '../services/actions/create-note.action';
+import { deleteNoteAction, restoreNoteAction, permanentDeleteNoteAction, emptyTrashAction, deleteFolderAction } from '../services/actions/delete-note.action';
+import { updateNoteAction, renameFolderAction } from '../services/actions/update-note.action';
 import { toast } from '@/hooks/use-toast';
-import { generateId, getErrorMessage } from '../lib/notes.helpers';
+import { generateId, getErrorMessage } from '../utils/notes.helpers';
 
 interface NotesState {
   notes: Note[];

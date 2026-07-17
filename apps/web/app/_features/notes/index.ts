@@ -1,41 +1,43 @@
-// Feature barrel — P0 Ownership Map
-// Canonical implementations:
-//  - UI / feature modules: `modules/` (canonical)
-//  - State store implementation: `store/` (canonical, Zustand)
-//  - Helper utilities: `lib/` (canonical)
-// Compatibility / temporary shims (deprecated, P1):
-//  - `components/` (compat re-exports -> prefer `modules/`)
-//  - `state/` (compat re-exports -> prefer `store/`)
-//  - `utils/` (compat re-exports -> prefer `lib/`)
-// These comments freeze ownership for P0: do not add new implementations
-// to compatibility folders. Importers should prefer the canonical surfaces.
-// Stabilized feature barrel
-export * as Components from './components';
-export * as Modules from './modules';
-export * as Hooks from './hooks';
-export * as State from './state';
-export * as Services from './services';
-export * as Utils from './utils';
-export * as Constants from './constants/notes.constants';
-// Canonical, commonly-used helpers re-exported at the feature root to
-// discourage deep imports. Prefer `import { generateFallbackTitle } from '@features/notes'`.
+// Feature barrel — intentional public API for the Notes feature.
+// Keep this surface narrow and aligned with the canonical domain entry points.
+
+// Canonical helpers used directly by route-level consumers.
 export {
-	generateId,
-	getErrorMessage,
-	extractPlainTextFromJSON,
-	formatRelativeDate,
-	generateFallbackTitle,
-	hasWikiLinkToNote,
-	countWikiLinks,
-	filterNotes,
-	getFolderNoteCount,
-} from './lib/notes.helpers';
+  generateId,
+  getErrorMessage,
+  isValidNoteId,
+  extractPlainTextFromJSON,
+  formatRelativeDate,
+  generateFallbackTitle,
+  hasWikiLinkToNote,
+  countWikiLinks,
+  filterNotes,
+  getFolderNoteCount,
+} from './utils/notes.helpers';
 
-// Re-export the canonical store hook at the feature root to avoid deep imports.
-export { useNotesStore } from './store/notes.store';
+// Canonical store and selectors.
+export { useNotesStore, useFilteredNotes } from './store';
 
-// Types
-export * from './types/notes.types';
-// Backwards compatible named exports
-export { NoteEditorPage } from './components/NoteEditorPage';
-export { NotesErrorBoundary } from './components/NotesErrorBoundary';
+// Canonical hooks used by consumers.
+export { useNoteNavigation } from './hooks/useNoteNavigation';
+export { useCommandPalette, openCommandPalette } from './hooks/useCommandPalette';
+export { useSidebar } from './organization/sidebar/hooks/useSidebar';
+export { useNotesList } from './notes/list/hooks/useNotesList';
+export { recordVisit } from './notes/list/hooks/useDiscovery';
+
+// Canonical domain types.
+export * from './types';
+
+// Canonical UI entry points for route consumers.
+export { NoteEditorPage } from './notes/index';
+export { NotesErrorBoundary } from './widgets/NotesErrorBoundary';
+export { NotesSidebar } from './organization/sidebar/components/NotesSidebar';
+export { NotesList, NotesHeader, ViewToggle } from './notes/index';
+export type { ViewMode } from './notes/index';
+export { CommandPalette } from './editor';
+
+// Canonical root wrapper components.
+export { NotesLayout } from './NotesLayout';
+export { NotesProvider } from './NotesProvider';
+export { NotesLoader } from './NotesLoader';
+export { NotesError } from './NotesError';

@@ -1,7 +1,9 @@
+'use client';
+
 import { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useNotesStore } from './notes.store';
-import { filterNotes } from '../lib/notes.helpers';
+import { filterNotes } from '../utils';
 import { ALL_NOTES_FOLDER_ID, type NotesView } from '../types/notes.types';
 
 // Internal helpers

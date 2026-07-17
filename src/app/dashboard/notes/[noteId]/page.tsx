@@ -1,10 +1,8 @@
 'use client';
 
-import { Suspense, use, useEffect } from 'react';
+import { Suspense, use, useEffect, useLayoutEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { NoteEditorPage } from '@features/notes';
-import { isValidNoteId } from '@features/notes/lib/notes.helpers';
-import { recordVisit } from '@features/notes/hooks';
+import { NoteEditorPage, recordVisit, isValidNoteId, useNotesStore, type Note } from '@features/notes';
 import { ROUTES } from '@/lib/routes';
 
 /**
@@ -18,6 +16,32 @@ export default function EditorPage({
 }) {
   const { noteId } = use(params);
   const router = useRouter();
+
+  useLayoutEffect(() => {
+    if (!isValidNoteId(noteId)) return;
+
+    const existing = useNotesStore.getState().notes.find((entry) => entry.id === noteId);
+    if (existing) return;
+
+    const fallbackNote: Note = {
+      id: noteId,
+      title: 'Untitled',
+      content: { type: 'doc', content: [{ type: 'paragraph' }] },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      isDeleted: false,
+      isPinned: false,
+      folderId: null,
+    };
+
+    useNotesStore.setState((state) => ({
+      ...state,
+      notes: [fallbackNote, ...state.notes],
+      isInitialized: true,
+      isLoading: false,
+      error: null,
+    }));
+  }, [noteId]);
 
   // Guard: Redirect must happen in an effect — calling router.replace() during
   // render is a React violation that produces "Cannot update a component while

@@ -16,7 +16,8 @@ npx playwright test --config=e2e/playwright.config.ts
 ```
 
 Where to import from
-- Canonical UI: `@features/notes/components` or `@features/notes/components/<sub>`
+- Canonical editor UI: `@features/notes/editor` or `@features/notes/editor/components/<sub>`
+- Canonical notes UI: `@features/notes/notes/list/components` or `@features/notes/organization/sidebar/components`
 - Module façade: `@features/notes/modules` or `@features/notes/modules/<module>`
 - Feature barrel: `@features/notes` (exposes named namespaces)
 - State canonical: `@features/notes/store` — use `@features/notes/state` only for compatibility if needed.

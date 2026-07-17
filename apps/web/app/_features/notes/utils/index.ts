@@ -1,4 +1,4 @@
-// Utils barrel (placeholder)
-// Add helper exports here when implemented.
+// Utils barrel
+// Canonical helper exports for the Notes feature.
+export * from './notes.helpers';
 
-export {};

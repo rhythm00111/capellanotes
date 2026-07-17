@@ -1,9 +1,8 @@
-// Public hooks surface
-export * from '@features/notes/hooks/useEditor';
-export * from '@features/notes/hooks/useNotes';
-export * from '@features/notes/hooks/useNoteNavigation';
-export * from '@features/notes/hooks/useCommandPalette';
-// Cross-module hooks re-exports (stabilized canonical surface)
-export * from '@features/notes/hooks/useNotesList';
-export * from '@features/notes/hooks/useDiscovery';
-export * from '@features/notes/hooks/useSidebar';
+// Public hooks surface for the notes feature.
+export { useEditor } from '../editor/hooks/useEditor';
+export { useNotes, useFolders, useNotesLoading } from './useNotes';
+export { useNoteNavigation } from './useNoteNavigation';
+export { useCommandPalette, openCommandPalette } from './useCommandPalette';
+export { useNotesList } from '../notes/list/hooks/useNotesList';
+export { recordVisit } from '../notes/list/hooks/useDiscovery';
+export { useSidebar } from '../organization/sidebar/hooks/useSidebar';

@@ -1,8 +1,11 @@
+// Shared navigation hook for note routing and creation flows.
+'use client';
+
 import { useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { useNotesStore } from '../store/notes.store';
-import { isValidNoteId } from '../lib/notes.helpers';
+import { isValidNoteId } from '@features/notes';
 import { ROUTES } from '@/lib/routes';
 
 /**

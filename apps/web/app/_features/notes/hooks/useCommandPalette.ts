@@ -1,3 +1,6 @@
+// Ownership: hooks (shared)
+// Classification: Shared hook — lightweight pub/sub for command palette.
+// Migration note: Keep in `hooks/` as part of the shared foundation.
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';

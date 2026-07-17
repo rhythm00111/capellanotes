@@ -1,12 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { NotesSidebar } from '@features/notes/components/sidebar';
-import { NotesList, NotesHeader } from '@features/notes/components/list';
-import { useNotesList } from '@features/notes/hooks';
-import { useNoteNavigation } from '@features/notes/hooks';
-import { useNotesStore } from '@features/notes/state/notes.store';
-import type { ViewMode } from '@features/notes/components/list/ViewToggle';
+import { NotesSidebar, NotesList, NotesHeader, useNotesStore, ViewMode, useNotesList, useNoteNavigation } from '@features/notes';
 
 const VIEW_MODE_KEY = 'notes-view-mode';
 
