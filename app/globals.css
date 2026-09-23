@@ -1,0 +1,743 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Capella Pro Notes - Premium Note-Taking Design System */
+/* Flagship Editor Theme - Competing with Notion, Obsidian, Evernote */
+
+@layer base {
+  :root {
+    /* Core backgrounds - pure black theme */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+    
+    /* Card surfaces */
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
+    
+    /* Popover/Dropdown - slightly elevated */
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+    
+    /* Primary - teal (actions, selected states, CTAs) */
+    --primary: 173 80% 40%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary - dark gray */
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 80%;
+    
+    /* Muted - for less emphasis */
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 42%;
+    
+    /* Accent - teal for links/actions */
+    --accent: 173 80% 40%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Borders - subtle on black */
+    --border: 0 0% 12%;
+    --border-strong: 0 0% 17%;
+    --input: 0 0% 12%;
+    --ring: 173 80% 40%;
+    
+    --radius: 0.5rem;
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 63%;
+    --sidebar-primary: 173 80% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 173 80% 40%;
+    
+    /* Custom Capella tokens */
+    --note-card: 0 0% 7%;
+    --note-card-hover: 0 0% 10%;
+    --note-card-border: 0 0% 14%;
+    --note-card-shadow: 0 0% 0%;
+    
+    --editor-bg: 0 0% 4%;
+    --editor-surface: 0 0% 6%;
+    --editor-line: 0 0% 12%;
+    
+    /* Tags */
+    --tag-default: 0 0% 15%;
+    --tag-blue: 217 60% 20%;
+    --tag-green: 160 50% 18%;
+    --tag-amber: 38 60% 18%;
+    --tag-rose: 350 50% 18%;
+    --tag-purple: 270 50% 20%;
+    
+    /* AI */
+    --ai-panel-bg: 0 0% 5%;
+    --ai-suggestion: 160 30% 12%;
+    --ai-accent: 160 84% 39%;
+    
+    /* Semantic colors */
+    --success: 160 84% 39%;
+    --warning: 38 92% 50%;
+    --info: 217 91% 60%;
+    --error: 0 84% 60%;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.4), 0 2px 4px -2px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.5), 0 4px 6px -4px hsl(0 0% 0% / 0.5);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.6), 0 8px 10px -6px hsl(0 0% 0% / 0.6);
+    --shadow-glow: 0 0 20px -5px hsl(var(--primary) / 0.3);
+    --shadow-glow-lg: 0 8px 24px hsl(var(--primary) / 0.25);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  ::selection {
+    background: rgba(29, 158, 117, 0.35);
+  }
+
+  ::-moz-selection {
+    background: rgba(29, 158, 117, 0.35);
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+}
+
+@layer components {
+  /* ========== TYPOGRAPHY SCALE ========== */
+  .text-title {
+    @apply text-5xl font-bold leading-tight tracking-tight;
+  }
+  
+  .text-subtitle {
+    @apply text-3xl font-semibold leading-snug;
+  }
+  
+  .text-section {
+    @apply text-2xl font-semibold leading-snug;
+  }
+  
+  .text-body-lg {
+    @apply text-lg leading-relaxed;
+  }
+  
+  .text-body {
+    @apply text-base leading-relaxed;
+  }
+  
+  .text-body-sm {
+    @apply text-sm leading-normal;
+  }
+  
+  .text-caption {
+    @apply text-xs font-medium leading-normal;
+  }
+
+  /* ========== TOP BAR ========== */
+  .editor-top-bar {
+    @apply h-16 sticky top-0 z-50 flex items-center justify-between px-4 md:px-8;
+    @apply bg-background/95 backdrop-blur-sm;
+    @apply border-b border-border transition-shadow duration-200;
+  }
+  
+  .editor-top-bar.scrolled {
+    @apply shadow-md;
+  }
+
+  /* ========== NOTE CARDS ========== */
+  .note-card {
+    @apply rounded-xl transition-all duration-200;
+    background-color: hsl(var(--note-card));
+    border: 1px solid hsl(var(--note-card-border));
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .note-card:hover {
+    @apply border-primary/30;
+    background: hsl(var(--note-card-hover));
+    box-shadow: var(--shadow-md);
+  }
+  
+  .note-card.selected {
+    @apply border-primary/50 ring-2 ring-primary/20;
+  }
+
+  /* ========== FLOATING FORMAT BAR ========== */
+  .floating-format-bar {
+    @apply flex items-center gap-1 p-1.5 rounded-lg;
+    @apply bg-popover border border-border-strong;
+    @apply shadow-xl;
+    @apply animate-in fade-in-0 zoom-in-95 duration-150;
+  }
+  
+  .format-btn {
+    @apply w-8 h-8 flex items-center justify-center rounded-md;
+    @apply text-muted-foreground hover:text-foreground hover:bg-muted;
+    @apply transition-all duration-150;
+  }
+  
+  .format-btn.active {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  .format-btn:hover {
+    @apply scale-[1.02];
+  }
+  
+  .format-divider {
+    @apply w-px h-5 bg-border mx-1;
+  }
+
+  /* ========== SLASH COMMAND MENU ========== */
+  .slash-menu {
+    @apply absolute z-50 w-72 py-2 rounded-xl;
+    @apply bg-popover border border-border-strong;
+    @apply shadow-xl;
+    @apply animate-in fade-in-0 slide-in-from-top-2 duration-150;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .slash-menu-group {
+    @apply px-3 py-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wide;
+  }
+  
+  .slash-menu-item {
+    @apply flex items-center gap-3 px-3 py-2.5 mx-2 rounded-lg cursor-pointer;
+    @apply transition-colors duration-100;
+  }
+  
+  .slash-menu-item:hover,
+  .slash-menu-item.selected {
+    @apply bg-muted;
+  }
+  
+  .slash-menu-item.selected {
+    @apply bg-primary/10 text-primary;
+  }
+  
+  .slash-menu-item-icon {
+    @apply w-8 h-8 flex items-center justify-center rounded-lg bg-muted;
+    @apply text-muted-foreground;
+  }
+  
+  .slash-menu-item.selected .slash-menu-item-icon {
+    @apply bg-primary/20 text-primary;
+  }
+
+  /* ========== EDITOR AREA ========== */
+  .editor-container {
+    @apply max-w-4xl mx-auto px-6 md:px-10 py-12;
+  }
+  
+  .editor-title {
+    @apply w-full text-4xl md:text-5xl font-bold bg-transparent outline-none;
+    @apply placeholder:text-muted-foreground/40;
+    @apply leading-tight tracking-tight;
+  }
+  
+  .editor-content {
+    @apply w-full min-h-[60vh] bg-transparent outline-none resize-none;
+    @apply text-foreground placeholder:text-muted-foreground/40;
+    @apply text-lg leading-loose;
+  }
+
+  /* ========== BLOCK STYLES ========== */
+  .editor-block {
+    @apply relative py-1 rounded-md transition-colors;
+  }
+  
+  .editor-block:hover {
+    @apply bg-muted/30;
+  }
+  
+  .block-handle {
+    @apply absolute -left-10 top-1/2 -translate-y-1/2;
+    @apply w-6 h-6 flex items-center justify-center rounded-md;
+    @apply text-muted-foreground opacity-0 cursor-grab;
+    @apply hover:bg-muted hover:text-foreground;
+    @apply transition-all duration-150;
+  }
+  
+  .editor-block:hover .block-handle {
+    @apply opacity-60;
+  }
+  
+  .block-add-btn {
+    @apply absolute -left-10 top-1/2 -translate-y-1/2;
+    @apply w-6 h-6 flex items-center justify-center rounded-md;
+    @apply text-muted-foreground opacity-0;
+    @apply hover:bg-muted hover:text-foreground;
+    @apply transition-all duration-150;
+  }
+  
+  .editor-block:hover .block-add-btn {
+    @apply opacity-60;
+  }
+
+  /* ========== SIDEBAR PANELS ========== */
+  .editor-sidebar {
+    @apply w-60 flex-shrink-0 border-r border-border;
+    @apply bg-sidebar;
+    @apply transition-all duration-250;
+  }
+  
+  .editor-sidebar.collapsed {
+    @apply w-0 overflow-hidden border-none;
+  }
+  
+  .sidebar-section {
+    @apply p-4 border-b border-border;
+  }
+  
+  .sidebar-section-title {
+    @apply text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3;
+  }
+
+  /* ========== AI BUTTON ========== */
+  .ai-fab {
+    @apply fixed bottom-6 right-6 z-50;
+    @apply w-14 h-14 rounded-full flex items-center justify-center;
+    @apply bg-gradient-to-br from-primary to-emerald-600;
+    @apply text-primary-foreground shadow-glow-lg;
+    @apply hover:scale-105 active:scale-95;
+    @apply transition-all duration-200;
+  }
+
+  /* ========== STATUS INDICATORS ========== */
+  .save-status {
+    @apply flex items-center gap-2 text-xs;
+  }
+  
+  .save-status.saving {
+    @apply text-muted-foreground;
+  }
+  
+  .save-status.saved {
+    @apply text-success;
+  }
+  
+  .save-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+  
+  .save-dot.saving {
+    @apply bg-muted-foreground animate-pulse;
+  }
+  
+  .save-dot.saved {
+    @apply bg-success;
+  }
+
+  /* ========== TAG STYLES ========== */
+  .tag {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium transition-colors;
+  }
+  
+  .tag-default { 
+    background-color: hsl(var(--tag-default));
+    @apply text-muted-foreground; 
+  }
+  .tag-blue { 
+    background-color: hsl(var(--tag-blue));
+    @apply text-blue-400; 
+  }
+  .tag-green { 
+    background-color: hsl(var(--tag-green));
+    @apply text-emerald-400; 
+  }
+  .tag-amber { 
+    background-color: hsl(var(--tag-amber));
+    @apply text-amber-400; 
+  }
+  .tag-rose { 
+    background-color: hsl(var(--tag-rose));
+    @apply text-rose-400; 
+  }
+  .tag-purple { 
+    background-color: hsl(var(--tag-purple));
+    @apply text-purple-400; 
+  }
+
+  /* ========== BUTTONS ========== */
+  .btn-premium {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm;
+    background: #063f47;
+    color: black;
+    @apply shadow-md;
+    @apply hover:shadow-lg hover:shadow-[#063f47]/20;
+    @apply active:scale-[0.97];
+    @apply transition-all duration-200;
+  }
+  
+  .btn-premium:hover {
+    background: #085a66;
+  }
+  
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-medium text-sm;
+    @apply text-muted-foreground hover:text-foreground hover:bg-muted;
+    @apply active:scale-[0.97];
+    @apply transition-all duration-200;
+  }
+  
+  .btn-icon {
+    @apply w-10 h-10 flex items-center justify-center rounded-lg;
+    @apply text-muted-foreground hover:text-foreground hover:bg-muted;
+    @apply active:scale-[0.97];
+    @apply transition-all duration-200;
+  }
+
+  /* ========== SCROLLBAR ========== */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.3);
+  }
+
+  /* ========== SIDEBAR SCROLLBAR (premium minimal) ========== */
+  .sidebar-nav {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.2s;
+  }
+
+  .sidebar-nav:hover {
+    scrollbar-color: rgb(64 64 64 / 0.5) transparent;
+  }
+
+  .sidebar-nav::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .sidebar-nav::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .sidebar-nav::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 100px;
+    transition: background-color 0.2s;
+  }
+
+  .sidebar-nav:hover::-webkit-scrollbar-thumb {
+    background-color: rgb(64 64 64 / 0.5);
+  }
+
+  .sidebar-nav::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(82 82 82 / 0.7) !important;
+  }
+
+  /* ========== KEYBOARD SHORTCUT HINTS ========== */
+  .kbd {
+    @apply inline-flex items-center justify-center h-5 px-1.5 rounded;
+    @apply bg-muted text-muted-foreground text-xs font-mono;
+    @apply border border-border;
+  }
+}
+
+/* ========== TIPTAP EDITOR ========== */
+/* Placeholder text for empty editor paragraphs */
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: hsl(0 0% 100% / 0.15);
+  pointer-events: none;
+  height: 0;
+}
+
+/* ── ProseMirror surface typography ─────────────────────────────────────── */
+/* These rules live outside @layer so they take precedence over Tailwind's
+   prose plugin defaults without needing !important. */
+.ProseMirror {
+  letter-spacing: -0.011em;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.ProseMirror p {
+  margin-top: 0;
+  margin-bottom: 0.75em;
+}
+
+.ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+.ProseMirror h1 {
+  font-size: 1.875rem;  /* 30px */
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin-top: 1.75em;
+  margin-bottom: 0.5em;
+  color: hsl(0 0% 100% / 0.92);
+}
+
+.ProseMirror h2 {
+  font-size: 1.375rem;  /* 22px */
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-top: 1.5em;
+  margin-bottom: 0.4em;
+  color: hsl(0 0% 100% / 0.88);
+}
+
+.ProseMirror h3 {
+  font-size: 1.125rem;  /* 18px — clear step above 16px body */
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  margin-top: 1.25em;
+  margin-bottom: 0.35em;
+  color: hsl(0 0% 100% / 0.85);
+}
+
+.ProseMirror h1:first-child,
+.ProseMirror h2:first-child,
+.ProseMirror h3:first-child {
+  margin-top: 0;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  margin-top: 0.5em;
+  margin-bottom: 0.75em;
+  padding-left: 1.5em;
+}
+
+.ProseMirror li {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.ProseMirror blockquote {
+  border-left: 2px solid hsl(0 0% 100% / 0.12);
+  padding-left: 1em;
+  margin-left: 0;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+  color: hsl(0 0% 100% / 0.5);
+  font-style: italic;
+}
+
+.ProseMirror hr {
+  border: none;
+  border-top: 1px solid hsl(0 0% 100% / 0.08);
+  margin: 1.5em 0;
+}
+
+/* ── Inline code + code blocks ─────────────────────────────────────────────── */
+.ProseMirror code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.875em;
+  background: hsl(0 0% 100% / 0.06);
+  color: hsl(160 60% 68%);
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+  border: 1px solid hsl(0 0% 100% / 0.08);
+}
+
+.ProseMirror pre {
+  background: hsl(0 0% 100% / 0.04);
+  border: 1px solid hsl(0 0% 100% / 0.07);
+  border-radius: 6px;
+  padding: 1em 1.25em;
+  margin: 0.75em 0;
+  overflow-x: auto;
+}
+
+.ProseMirror pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875em;
+  color: hsl(0 0% 100% / 0.80);
+}
+
+/* ── Phase 1 Editor Styles ──────────────────────────────────────────────────── */
+
+/* T7: Block-level left-edge hover indicator */
+.ProseMirror > *:hover {
+  box-shadow: -3px 0 0 0 hsl(0 0% 100% / 0.07);
+  border-radius: 0 4px 4px 0;
+  transition: box-shadow 100ms ease-out;
+}
+
+/* T10: Wiki-link mark — teal accent, understated underline */
+.wiki-link-mark {
+  color: hsl(160, 60%, 65%);
+  text-decoration: underline;
+  text-decoration-color: hsl(160 60% 65% / 0.3);
+  text-underline-offset: 2px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: color 100ms ease, text-decoration-color 100ms ease;
+}
+.wiki-link-mark:hover {
+  color: hsl(160, 70%, 72%);
+  text-decoration-color: hsl(160 70% 72% / 0.5);
+}
+
+/* T14: Highlight mark — amber background tint */
+.ProseMirror mark {
+  background: hsl(47 100% 50% / 0.15);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0.05em 0.15em;
+}
+
+/* T8: Inline/block images */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid hsl(0 0% 100% / 0.08);
+  display: block;
+  margin: 1em 0;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+  
+  .glow-sm {
+    box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.15);
+  }
+  
+  .glow-md {
+    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.25);
+  }
+  
+  .glow-lg {
+    box-shadow: 0 8px 24px hsl(var(--primary) / 0.3);
+  }
+
+  /* ========== Z-INDEX SYSTEM ========== */
+  /* Prevents overlapping and layering issues */
+  .z-base { z-index: 0; }
+  .z-content { z-index: 1; }
+  .z-header { z-index: 10; }
+  .z-sidebar { z-index: 15; }
+  .z-dropdown { z-index: 20; }
+  .z-context-menu { z-index: 25; }
+  .z-overlay { z-index: 30; }
+  .z-modal { z-index: 40; }
+  .z-toast { z-index: 50; }
+  .z-tooltip { z-index: 60; }
+  .z-loading { z-index: 70; }
+  .z-emergency { z-index: 100; }
+}
+
+/* Premium scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(6, 63, 71, 0.2) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(6, 63, 71, 0.2);
+  border-radius: 2px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 63, 71, 0.4);
+}
+
+/* Notion-style ultra-thin scrollbar for editor */
+.notion-scrollbar {
+  scrollbar-width: none; /* Firefox - hide by default */
+}
+
+.notion-scrollbar::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+.notion-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notion-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 1px;
+  transition: background 0.2s ease;
+}
+
+.notion-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.15);
+}
+
+.notion-scrollbar:hover {
+  scrollbar-width: thin; /* Firefox - show on hover */
+  scrollbar-color: hsl(var(--muted-foreground) / 0.15) transparent;
+}
+
+.notion-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.25);
+}

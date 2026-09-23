@@ -24,11 +24,17 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
       "@features/*": [
-        "./apps/web/app/_features/*"
+        "./app/_features/*"
+      ],
+      "@/_features/*": [
+        "./app/_features/*"
+      ],
+      "@web/*": [
+        "./*"
+      ],
+      "@/*": [
+        "./*"
       ]
     }
   },

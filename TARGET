@@ -1,0 +1,60 @@
+Notes Architecture
+
+The Notes feature manages all knowledge inside Capella Pro.
+
+It understands:
+
+Documents
+Markdown
+Rich Text
+Knowledge
+Tags
+Collections
+
+Notes Structure
+notes/
+│
+├── index.ts
+│
+├── Notes.tsx
+├── NotesLayout.tsx
+├── NotesProvider.tsx
+├── NotesLoader.tsx
+├── NotesError.tsx
+│
+├── editor/
+│
+├── notes/
+│
+├── organization/
+│
+├── widgets/
+│
+├── ai/
+│   ├── NotesAI.ts
+│   ├── NotesContext.ts
+│   ├── NotesPrompts.ts
+│   ├── Summarizer.ts
+│   ├── Rewriter.ts
+│   ├── GrammarAssistant.ts
+│   ├── Translator.ts
+│   ├── SmartTags.ts
+│   ├── KnowledgeExtraction.ts
+│   ├── SemanticSearch.ts
+│   ├── ActionItemGenerator.ts
+│   ├── DocumentInsights.ts
+│   ├── NoteQA.ts
+│   └── WritingAssistant.ts
+│
+├── collaboration/
+├── templates/
+├── search/
+├── services/
+├── store/
+├── providers/
+├── hooks/
+├── config/
+├── constants/
+├── types/
+├── utils/
+└── styles/
