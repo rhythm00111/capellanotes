@@ -35,6 +35,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Testing
+test-results/
+playwright-report/
+
 # IDE
 .vscode/
 .idea/

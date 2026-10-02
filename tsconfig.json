@@ -24,15 +24,6 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@features/*": [
-        "./app/_features/*"
-      ],
-      "@/_features/*": [
-        "./app/_features/*"
-      ],
-      "@web/*": [
-        "./*"
-      ],
       "@/*": [
         "./*"
       ]
@@ -46,6 +37,7 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "app.legacy"
   ]
 }

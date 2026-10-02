@@ -9,6 +9,7 @@ export default {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
     "./apps/**/*.{ts,tsx}",
+    "./notes/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {

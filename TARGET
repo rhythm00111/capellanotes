@@ -10,8 +10,8 @@ Rich Text
 Knowledge
 Tags
 Collections
-
 Notes Structure
+
 notes/
 │
 ├── index.ts
@@ -50,7 +50,6 @@ notes/
 ├── templates/
 ├── search/
 ├── services/
-├── store/
 ├── providers/
 ├── hooks/
 ├── config/
@@ -58,3 +57,73 @@ notes/
 ├── types/
 ├── utils/
 └── styles/
+Notes AI Responsibilities
+
+Notes AI understands knowledge.
+
+Examples:
+
+Summarize notes
+Rewrite notes
+Grammar correction
+Translation
+Smart tagging
+Semantic search
+Knowledge extraction
+Generate documentation
+Generate project briefs
+Generate blog posts
+Generate action items
+Question answering
+
+Notes AI never contains provider-specific code.
+
+Instead:
+
+Notes AI
+
+↓
+
+packages/ai
+
+↓
+
+AI Router
+
+↓
+
+Provider
+AI Architecture
+
+The AI infrastructure exists only once.
+
+packages/
+
+ai/
+│
+├── providers/
+│   ├── openai/
+│   ├── anthropic/
+│   ├── gemini/
+│   ├── groq/
+│   ├── xai/
+│   ├── openrouter/
+│   └── local/
+│
+├── gateway/
+│   ├── AIRouter.ts
+│   ├── ProviderManager.ts
+│   ├── ModelSelector.ts
+│   ├── ContextManager.ts
+│   ├── CostOptimizer.ts
+│   └── FallbackManager.ts
+│
+├── prompts/
+├── memory/
+├── streaming/
+├── embeddings/
+├── tools/
+├── telemetry/
+├── safety/
+└── index.ts
+Feature Communication
